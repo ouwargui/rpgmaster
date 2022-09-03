@@ -1,0 +1,84 @@
+{
+  "env": {
+      "es2021": true,
+      "node": true
+  },
+  "extends": [
+      "plugin:react/recommended",
+      "airbnb",
+      "plugin:react-hooks/recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+      "ecmaFeatures": {
+          "jsx": true
+      },
+      "ecmaVersion": "latest",
+      "sourceType": "module",
+      "project": "./tsconfig.json"
+  },
+  "plugins": [
+      "react",
+      "@typescript-eslint",
+      "react-hooks",
+      "prettier"
+  ],
+  "rules": {
+      "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto"
+          }
+      ],
+      "react/react-in-jsx-scope": "off",
+      "react/function-component-definition": "off",
+      "react/jsx-filename-extension": "off",
+      "import/extensions": [
+          "error",
+          "ignorePackages",
+          {
+            "js": "never",
+            "jsx": "never",
+            "ts": "never",
+            "tsx": "never"
+          }
+       ],
+       "object-curly-spacing": "off",
+       "@typescript-eslint/no-empty-interface": "off",
+       "no-console": "off",
+       "object-curly-newline": "off",
+       "camelcase": "off",
+       "@typescript-eslint/no-floating-promises": "off",
+       "no-confusing-arrow": "off",
+       "implicit-arrow-linebreak": "off",
+       "linebreak-style": "off",
+       "import/no-extraneous-dependencies": "off",
+       "@typescript-eslint/no-misused-promises": "off",
+       "react/require-default-props": "off",
+       "operator-linebreak": "off",
+       "semi": "off",
+       "@typescript-eslint/no-non-null-assertion": "off",
+       "@typescript-eslint/no-explicit-any": "off",
+       "react/jsx-props-no-spreading": "off",
+       "react/no-unstable-nested-components": "off",
+       "no-use-before-define": "off",
+       "react/jsx-curly-newline": "off",
+       "no-nested-ternary": "off",
+       "no-underscore-dangle": "off",
+       "no-useless-return": "off",
+       "global-require": "off",
+       "no-plusplus": "off",
+       "react/no-array-index-key": "off",
+       "react/style-prop-object": "off"
+  },
+  "settings": {
+      "import/resolver": {
+          "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          }
+      }
+  }
+}
