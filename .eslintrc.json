@@ -72,7 +72,8 @@
        "global-require": "off",
        "no-plusplus": "off",
        "react/no-array-index-key": "off",
-       "react/style-prop-object": "off"
+       "react/style-prop-object": "off",
+       "import/prefer-default-export": "off"
   },
   "settings": {
       "import/resolver": {
