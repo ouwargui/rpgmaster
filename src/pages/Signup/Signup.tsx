@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, TextInput, Button} from 'react-native';
-import {login, signOut} from '../services/auth';
+import {login, signOut} from '../../services/auth';
 
 const Signup: React.FC = () => {
   const [email, setEmail] = useState('');
