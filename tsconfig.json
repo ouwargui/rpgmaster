@@ -4,5 +4,4 @@
     "strict": true,
   },
   "esModuleInterop": true,
-  "types": ["styled-components-react-native"]
 }
