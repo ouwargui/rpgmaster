@@ -4,7 +4,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import {StatusBar} from 'expo-status-bar';
 import StackRouter from './src/routes/Stack';
 import AuthProvider from './src/contexts/AuthProvider';
-import defaultTheme from './src/theme/default';
 
 const App: React.FC = () => (
   <AuthProvider>
