@@ -5,6 +5,7 @@ import {
   setPersistence,
   inMemoryPersistence,
   signOut as logout,
+  signInAnonymously,
 } from 'firebase/auth';
 import {firebaseApp} from '../config/firebase';
 
@@ -28,6 +29,13 @@ export const login = async (email: string, password: string) => {
     email,
     password,
   );
+
+  return userCredential.user;
+};
+
+export const loginAnonymously = async () => {
+  await setPersistence(auth, inMemoryPersistence);
+  const userCredential = await signInAnonymously(auth);
 
   return userCredential.user;
 };

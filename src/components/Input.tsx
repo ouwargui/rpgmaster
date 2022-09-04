@@ -21,7 +21,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <View
       className="
-        p-2
+        px-2
         w-full
         h-14
         bg-[#091B24]
@@ -35,7 +35,7 @@ const Input: React.FC<InputProps> = ({
       {...props}
     >
       <TextInput
-        className={`text-zinc-300 ${
+        className={`h-full text-zinc-300 ${
           contentType === 'password' ? 'w-11/12' : 'w-full'
         }`}
         keyboardAppearance="dark"
@@ -50,7 +50,7 @@ const Input: React.FC<InputProps> = ({
       {contentType === 'password' && (
         <TouchableOpacity
           activeOpacity={0.6}
-          className="flex-1 justify-center items-center"
+          className="flex-1 h-full justify-center items-center"
           onPress={() => setViewPassword(!viewPassword)}
         >
           {!viewPassword ? (
