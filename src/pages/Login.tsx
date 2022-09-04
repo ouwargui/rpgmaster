@@ -11,12 +11,14 @@ import {
 } from 'react-native';
 import Feather from '@expo/vector-icons/Feather';
 import Input from '../components/Input';
-import {login, loginAnonymously} from '../services/auth';
+import {login} from '../services/auth';
+import Button from '../components/Button';
 
 const Login: React.FC = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     navigation.setOptions({
@@ -26,10 +28,25 @@ const Login: React.FC = () => {
 
   const handlePressLogin = async () => {
     try {
+      setIsLoading(true);
       await login(email, password);
+      setIsLoading(false);
     } catch (e) {
+      setIsLoading(false);
       Alert.alert('Error', 'Invalid email or password');
     }
+  };
+
+  const handlePressSignup = () => {
+    navigation.navigate('Signup' as never);
+  };
+
+  const handlePressForgotPassword = () => {
+    navigation.navigate('ForgotPassword' as never);
+  };
+
+  const handlePressLoginAsGuest = () => {
+    navigation.navigate('LoginAsGuest' as never);
   };
 
   return (
@@ -53,19 +70,27 @@ const Login: React.FC = () => {
                 value={password}
                 onChangeText={setPassword}
               />
+              <TouchableOpacity
+                activeOpacity={0.6}
+                className="self-end"
+                onPress={handlePressForgotPassword}
+              >
+                <Text className="underline text-white">
+                  Forgot your password?
+                </Text>
+              </TouchableOpacity>
               <View className="w-full justify-center items-center">
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  className={`w-full h-14 my-4 justify-center items-center ${
-                    !email || !password ? 'bg-zinc-600' : 'bg-[#006E63]'
-                  }`}
-                  onPress={handlePressLogin}
+                <Button
+                  title="LOGIN"
                   disabled={!email || !password}
+                  onPress={handlePressLogin}
+                  isLoading={isLoading}
+                />
+                <TouchableOpacity
+                  activeOpacity={0.6}
+                  onPress={handlePressSignup}
                 >
-                  <Text className="text-white font-bold">LOGIN</Text>
-                </TouchableOpacity>
-                <TouchableOpacity activeOpacity={0.6}>
-                  <Text className="text-white">
+                  <Text className="underline text-white">
                     Don&apos;t have an account yet? Click here to sign up.
                   </Text>
                 </TouchableOpacity>
@@ -74,7 +99,7 @@ const Login: React.FC = () => {
             <TouchableOpacity
               activeOpacity={0.7}
               className="w-full justify-center items-center flex-row gap-2"
-              onPress={() => loginAnonymously()}
+              onPress={handlePressLoginAsGuest}
             >
               <Text className="text-white text-lg">Continue as a guest</Text>
               <Feather name="arrow-right-circle" color="white" size={24} />
