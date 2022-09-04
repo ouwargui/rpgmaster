@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Button} from 'react-native';
-import {signOut} from '../../services/auth';
+import {signOut} from '../services/auth';
 
 const Home: React.FC = () => {
   const handleSignout = async () => {
