@@ -7,9 +7,9 @@ import {
   View,
   Keyboard,
   TouchableOpacity,
+  Image,
   Alert,
 } from 'react-native';
-import Feather from '@expo/vector-icons/Feather';
 import Input from '../components/Input';
 import {login} from '../services/auth';
 import Button from '../components/Button';
@@ -54,7 +54,10 @@ const Login: React.FC = () => {
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View className="flex-1">
           <View className="w-full h-2/6 justify-center items-center">
-            <Text className="text-white text-4xl">RPG MASTER</Text>
+            <Image
+              className="w-[128px] top-[10px] h-[128px]"
+              source={{uri: 'https://i.imgur.com/beLyDnp.png'}}
+            />
           </View>
           <View className="flex-1 p-5 rounded-t-[35px] justify-between h-3/5 bg-white">
             <View className="pt-5 justify-start items-center gap-4">
@@ -66,14 +69,12 @@ const Login: React.FC = () => {
                 contentType="emailAddress"
                 value={email}
                 onChangeText={setEmail}
-                className="bg-white text-[#404040] border-white shadow"
               />
               <Input
                 placeholder="Senha"
                 contentType="password"
                 value={password}
                 onChangeText={setPassword}
-                className="bg-white text-[#404040] border-white shadow"
               />
               <TouchableOpacity
                 activeOpacity={0.6}
@@ -81,33 +82,31 @@ const Login: React.FC = () => {
                 onPress={handlePressForgotPassword}
               >
                 <Text className="underline text-[#404040]">
-                  Forgot your password?
+                  Esqueci minha senha.
                 </Text>
               </TouchableOpacity>
-              <View className="w-full justify-center items-center">
+              <View className="w-full  justify-center items-center">
                 <Button
-                  title="LOGIN"
+                  title="Entrar na taverna"
                   disabled={!email || !password}
                   onPress={handlePressLogin}
                   isLoading={isLoading}
                 />
-                <TouchableOpacity
-                  activeOpacity={0.6}
-                  onPress={handlePressSignup}
-                >
-                  <Text className="underline text-[#404040]">
-                    Don&apos;t have an account yet? Click here to sign up.
-                  </Text>
-                </TouchableOpacity>
               </View>
             </View>
             <TouchableOpacity
-              activeOpacity={0.7}
-              className="w-full justify-center items-center flex-row gap-2"
-              onPress={handlePressLoginAsGuest}
+              className="rounded-[100px] border-[1px] border-[#eee] bg-[#fff] h-[36px] w-40 shadow-md
+              shadow-[#00000071] bottom-[10px] self-center flex justify-center items-center flex-row"
+              activeOpacity={0.6}
+              onPress={handlePressSignup}
             >
-              <Text className="text-white text-lg">Continue as a guest</Text>
-              <Feather name="arrow-right-circle" color="white" size={24} />
+              <Image
+                className="w-[30px] h-[30px]"
+                source={{uri: 'https://i.imgur.com/IYYKyQt.png'}}
+              />
+              <Text className="text-[#404040] font-semibold text-[14px]">
+                Novo Taverneiro
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

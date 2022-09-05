@@ -24,13 +24,14 @@ const Input: React.FC<InputProps> = ({
         px-2
         w-full
         h-14
-        bg-[#091B24]
-        border-zinc-800
-        border-[1px]
-        rounded-md
+        bg-[#fff]
+        border-[#c7c7c7b8]
+        rounded-[11px]
         justify-start
         items-center
         flex-row
+        shadow-md
+        shadow-[#00000071]
       "
       {...props}
     >
