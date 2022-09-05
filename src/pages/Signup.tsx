@@ -1,34 +1,19 @@
-import React, {useState} from 'react';
-import {View, TextInput, Button} from 'react-native';
-import {login, signOut} from '../services/auth';
+import React from 'react';
+import {ScrollView, Text, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const Signup: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleCadastro = async () => {
-    try {
-      await login(email, password);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const handleSignout = async () => {
-    await signOut();
-  };
+  const {bottom} = useSafeAreaInsets();
 
   return (
-    <View>
-      <TextInput placeholder="email" value={email} onChangeText={setEmail} />
-      <TextInput
-        placeholder="password"
-        value={password}
-        onChangeText={setPassword}
-      />
-      <Button title="Login" onPress={handleCadastro} />
-      <Button title="sign out" onPress={handleSignout} />
-    </View>
+    <ScrollView
+      className="flex-1 bg-[#00141A]"
+      contentContainerStyle={{flexGrow: 1}}
+    >
+      <View className="flex-1" style={{paddingBottom: bottom}}>
+        <Text className="text-white">teste</Text>
+      </View>
+    </ScrollView>
   );
 };
 
