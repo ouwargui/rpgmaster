@@ -14,6 +14,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Input from '../components/Input';
 import {login} from '../services/auth';
 import Button from '../components/Button';
+import LoginWithGoogle from '../components/LoginWithGoogle';
 
 const Login: React.FC = () => {
   const navigation = useNavigation();
@@ -83,7 +84,7 @@ const Login: React.FC = () => {
                   Esqueci minha senha.
                 </Text>
               </TouchableOpacity>
-              <View className="w-full  justify-center items-center">
+              <View className="w-full justify-center items-center">
                 <Button
                   title="Entrar na taverna"
                   disabled={!email || !password}
@@ -91,6 +92,7 @@ const Login: React.FC = () => {
                   isLoading={isLoading}
                 />
               </View>
+              <LoginWithGoogle />
             </View>
             <TouchableOpacity
               style={{marginBottom: bottom}}

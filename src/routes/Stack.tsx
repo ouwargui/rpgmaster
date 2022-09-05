@@ -1,13 +1,13 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../pages/Home';
 import Signup from '../pages/Signup';
-import {useAuth} from '../contexts/AuthProvider';
+import {useAuth} from '../hooks/useAuth';
 import Login from '../pages/Login';
 
 const Stack = createNativeStackNavigator();
 
 const StackRouter: React.FC = () => {
-  const user = useAuth();
+  const {user} = useAuth();
 
   return (
     <Stack.Navigator

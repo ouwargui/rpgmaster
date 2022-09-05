@@ -2,8 +2,9 @@ import 'dotenv/config';
 
 export default {
   owner: 'ouwargui',
-  name: 'rpgmaster',
-  slug: 'rpgmaster',
+  name: 'Taverna: RPG Helper',
+  slug: 'taverna-rpg-helper',
+  scheme: 'taverna-rpg-helper',
   version: '1.0.0',
   orientation: 'portrait',
   icon: './assets/icon.png',
@@ -37,5 +38,8 @@ export default {
     FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
     FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
     FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID,
+    FIREBASE_GOOGLEAUTH_CLIENT_ID: process.env.FIREBASE_GOOGLEAUTH_CLIENT_ID,
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_KEY: process.env.GOOGLE_CLIENT_KEY,
   },
 };
