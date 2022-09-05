@@ -36,7 +36,7 @@ const Input: React.FC<InputProps> = ({
       {...props}
     >
       <TextInput
-        className={`h-full text-zinc-300 ${
+        className={`h-full text-zinc-500 ${
           contentType === 'password' ? 'w-11/12' : 'w-full'
         }`}
         keyboardAppearance="dark"

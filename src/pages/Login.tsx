@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {
-  SafeAreaView,
   Text,
   TouchableWithoutFeedback,
   View,
@@ -9,7 +8,9 @@ import {
   TouchableOpacity,
   Image,
   Alert,
+  KeyboardAvoidingView,
 } from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Input from '../components/Input';
 import {login} from '../services/auth';
 import Button from '../components/Button';
@@ -19,6 +20,7 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const {bottom} = useSafeAreaInsets();
 
   useEffect(() => {
     navigation.setOptions({
@@ -45,14 +47,10 @@ const Login: React.FC = () => {
     navigation.navigate('ForgotPassword' as never);
   };
 
-  const handlePressLoginAsGuest = () => {
-    navigation.navigate('LoginAsGuest' as never);
-  };
-
   return (
-    <SafeAreaView className="flex-1 bg-[#404040]">
+    <View className="flex-1 bg-[#404040]">
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View className="flex-1">
+        <KeyboardAvoidingView className="flex-1" behavior="padding">
           <View className="w-full h-2/6 justify-center items-center">
             <Image
               className="w-[128px] top-[10px] h-[128px]"
@@ -95,8 +93,9 @@ const Login: React.FC = () => {
               </View>
             </View>
             <TouchableOpacity
+              style={{marginBottom: bottom}}
               className="rounded-[100px] border-[1px] border-[#eee] bg-[#fff] h-[36px] w-40 shadow-md
-              shadow-[#00000071] bottom-[10px] self-center flex justify-center items-center flex-row"
+                shadow-[#00000071] bottom-[10px] self-center flex justify-center items-center flex-row"
               activeOpacity={0.6}
               onPress={handlePressSignup}
             >
@@ -109,9 +108,9 @@ const Login: React.FC = () => {
               </Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
-    </SafeAreaView>
+    </View>
   );
 };
 
