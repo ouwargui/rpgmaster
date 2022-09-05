@@ -50,32 +50,37 @@ const Login: React.FC = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-[#00141A]">
+    <SafeAreaView className="flex-1 bg-[#404040]">
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View className="flex-1 p-5">
-          <View className="w-full h-1/5 justify-center items-center">
+        <View className="flex-1">
+          <View className="w-full h-2/6 justify-center items-center">
             <Text className="text-white text-4xl">RPG MASTER</Text>
           </View>
-          <View className="flex-1 justify-between">
-            <View className="pt-20 justify-start items-center gap-4">
+          <View className="flex-1 p-5 rounded-t-[35px] justify-between h-3/5 bg-white">
+            <View className="pt-5 justify-start items-center gap-4">
+              <Text className="text-[#404040] text-2xl font-semibold mb-2.5">
+                Bem vindo à Taverna!
+              </Text>
               <Input
-                placeholder="Email"
+                placeholder="Login"
                 contentType="emailAddress"
                 value={email}
                 onChangeText={setEmail}
+                className="bg-white text-[#404040] border-white shadow"
               />
               <Input
-                placeholder="Password"
+                placeholder="Senha"
                 contentType="password"
                 value={password}
                 onChangeText={setPassword}
+                className="bg-white text-[#404040] border-white shadow"
               />
               <TouchableOpacity
                 activeOpacity={0.6}
                 className="self-end"
                 onPress={handlePressForgotPassword}
               >
-                <Text className="underline text-white">
+                <Text className="underline text-[#404040]">
                   Forgot your password?
                 </Text>
               </TouchableOpacity>
@@ -90,7 +95,7 @@ const Login: React.FC = () => {
                   activeOpacity={0.6}
                   onPress={handlePressSignup}
                 >
-                  <Text className="underline text-white">
+                  <Text className="underline text-[#404040]">
                     Don&apos;t have an account yet? Click here to sign up.
                   </Text>
                 </TouchableOpacity>

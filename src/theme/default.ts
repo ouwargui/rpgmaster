@@ -1,6 +1,6 @@
 export default {
   colors: {
-    background: '#00141A' as const,
+    background: '#404040' as const,
   },
   font: {
     colors: {
