@@ -22,13 +22,14 @@ export default ({config}: ConfigContext): ExpoConfig => ({
   assetBundlePatterns: ['**/*'],
   ios: {
     supportsTablet: true,
-    bundleIdentifier: 'com.taverna.taverna-rpg-helper',
+    bundleIdentifier: 'com.taverna.tavernarpghelper',
   },
   android: {
     adaptiveIcon: {
       foregroundImage: './assets/adaptive-icon.png',
       backgroundColor: '#FFFFFF',
     },
+    package: 'com.taverna.tavernarpghelper',
   },
   web: {
     favicon: './assets/favicon.png',
