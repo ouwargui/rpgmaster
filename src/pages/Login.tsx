@@ -9,12 +9,14 @@ import {
   Image,
   Alert,
   KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Input from '../components/Input';
 import {login} from '../services/auth';
 import Button from '../components/Button';
-import LoginWithGoogle from '../components/LoginWithGoogle';
+import LoginWithGoogle from '../components/Auth/LoginWithGoogle';
+import LoginWithApple from '../components/Auth/LoginWithApple';
 
 const Login: React.FC = () => {
   const navigation = useNavigation();
@@ -92,6 +94,7 @@ const Login: React.FC = () => {
                   isLoading={isLoading}
                 />
                 <LoginWithGoogle />
+                {Platform.OS === 'ios' && <LoginWithApple />}
               </View>
             </View>
             <TouchableOpacity

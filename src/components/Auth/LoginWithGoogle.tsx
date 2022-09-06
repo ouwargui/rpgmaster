@@ -4,8 +4,8 @@ import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 import Constants from 'expo-constants';
 import {GoogleAuthProvider} from 'firebase/auth';
-import {loginWithCredential} from '../services/auth';
-import googleLogo from '../../assets/google-logo.png';
+import {loginWithCredential} from '../../services/auth';
+import googleLogo from '../../../assets/google-logo.png';
 
 WebBrowser.maybeCompleteAuthSession();
 
