@@ -84,15 +84,15 @@ const Login: React.FC = () => {
                   Esqueci minha senha.
                 </Text>
               </TouchableOpacity>
-              <View className="w-full justify-center items-center">
+              <View className="w-full justify-evenly items-center flex-row">
                 <Button
                   title="Entrar na taverna"
                   disabled={!email || !password}
                   onPress={handlePressLogin}
                   isLoading={isLoading}
                 />
+                <LoginWithGoogle />
               </View>
-              <LoginWithGoogle />
             </View>
             <TouchableOpacity
               style={{marginBottom: bottom}}
