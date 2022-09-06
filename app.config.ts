@@ -1,6 +1,8 @@
 import 'dotenv/config';
+import {ExpoConfig, ConfigContext} from '@expo/config';
 
-export default {
+export default ({config}: ConfigContext): ExpoConfig => ({
+  ...config,
   owner: 'ouwargui',
   name: 'Taverna: RPG Helper',
   slug: 'taverna-rpg-helper',
@@ -20,6 +22,7 @@ export default {
   assetBundlePatterns: ['**/*'],
   ios: {
     supportsTablet: true,
+    bundleIdentifier: 'com.taverna.taverna-rpg-helper',
   },
   android: {
     adaptiveIcon: {
@@ -31,6 +34,9 @@ export default {
     favicon: './assets/favicon.png',
   },
   extra: {
+    eas: {
+      projectId: '4baad125-fa08-4159-8f89-e8d96296a555',
+    },
     FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
     FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
     FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID,
@@ -42,4 +48,4 @@ export default {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_KEY: process.env.GOOGLE_CLIENT_KEY,
   },
-};
+});
