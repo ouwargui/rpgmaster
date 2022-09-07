@@ -15,6 +15,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Input from '../components/Input';
 import {login} from '../services/auth';
 import Button from '../components/Button';
+import FloatingActionButton from '../components/FloatingActionButton/FloatingActionButton';
 import LoginWithGoogle from '../components/Auth/LoginWithGoogle';
 import LoginWithApple from '../components/Auth/LoginWithApple';
 
@@ -93,8 +94,12 @@ const Login: React.FC = () => {
                   onPress={handlePressLogin}
                   isLoading={isLoading}
                 />
-                <LoginWithGoogle />
-                {Platform.OS === 'ios' && <LoginWithApple />}
+                <View>
+                  <FloatingActionButton>
+                    <LoginWithGoogle />
+                    {Platform.OS === 'ios' && <LoginWithApple />}
+                  </FloatingActionButton>
+                </View>
               </View>
             </View>
             <TouchableOpacity

@@ -48,7 +48,7 @@ const LoginWithApple: React.FC = () => {
     <>
       {isAppleAuthAvailable && (
         <AppleAuth.AppleAuthenticationButton
-          className="w-14 h-14"
+          className="w-full h-full"
           buttonType={AppleAuth.AppleAuthenticationButtonType.SIGN_IN}
           buttonStyle={AppleAuth.AppleAuthenticationButtonStyle.BLACK}
           cornerRadius={30}

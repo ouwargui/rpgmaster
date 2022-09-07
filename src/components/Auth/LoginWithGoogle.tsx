@@ -27,7 +27,7 @@ const LoginWithGoogle: React.FC = () => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      className="shadow-xl shadow-[#00000071] w-14 h-14 bg-zinc-600 rounded-[100px] justify-center items-center"
+      className="w-full h-full justify-center items-center"
       onPress={() => promptAsync()}
       disabled={!request}
     >
