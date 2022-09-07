@@ -10,8 +10,11 @@ const Home: React.FC = () => {
   };
   return (
     <View>
-      <Text>{`Olá ${user?.displayName as string}`}</Text>
-      <Image className="h-14 w-14" source={{uri: user?.photoURL as string}} />
+      <Text>{`Olá ${user?.user?.displayName as string}`}</Text>
+      <Image
+        className="h-14 w-14"
+        source={{uri: user?.user?.photoURL as string}}
+      />
       <Button title="sign out" onPress={handleSignout} />
     </View>
   );

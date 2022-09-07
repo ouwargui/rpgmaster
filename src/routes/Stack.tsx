@@ -1,4 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import * as SplashScreen from 'expo-splash-screen';
 import Home from '../pages/Home';
 import Signup from '../pages/Signup';
 import {useAuth} from '../hooks/useAuth';
@@ -8,6 +9,12 @@ const Stack = createNativeStackNavigator();
 
 const StackRouter: React.FC = () => {
   const {user} = useAuth();
+
+  if (!user) {
+    return null;
+  }
+
+  SplashScreen.hideAsync();
 
   return (
     <Stack.Navigator
@@ -20,7 +27,7 @@ const StackRouter: React.FC = () => {
         },
       }}
     >
-      {user ? (
+      {user.user ? (
         <Stack.Screen name="Home" component={Home} />
       ) : (
         <>

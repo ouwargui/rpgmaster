@@ -12,20 +12,19 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-export const AuthContext = createContext({} as User | undefined);
+export const AuthContext = createContext(
+  {} as {user: User | undefined} | undefined,
+);
 
 const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
-  const [user, setUser] = useState<User | undefined>();
+  const [user, setUser] = useState<{user: User | undefined}>();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
-        console.log('logado');
-        console.log(firebaseUser);
-        setUser(firebaseUser);
+        setUser({user: firebaseUser});
       } else {
-        console.log('deslogado');
-        setUser(undefined);
+        setUser({user: undefined});
       }
     });
 
