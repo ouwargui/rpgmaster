@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {
   Text,
@@ -17,9 +17,10 @@ import PlayerCircle from '../components/PlayerCircle';
 
 interface PlayerCircleData {
   id: string;
-  name: string;
-  image: ImageSourcePropType;
-  isActive: boolean;
+  name?: string;
+  image?: ImageSourcePropType;
+  isActive?: boolean;
+  isAddPlayer?: boolean;
 }
 
 const DATA: PlayerCircleData[] = [
@@ -49,12 +50,6 @@ const DATA: PlayerCircleData[] = [
   },
   {
     id: '5',
-    name: 'André Santos',
-    isActive: false,
-    image: player1 as ImageSourcePropType,
-  },
-  {
-    id: '6',
     name: 'Darwin Núñez',
     isActive: false,
     image: player2 as ImageSourcePropType,
@@ -63,6 +58,7 @@ const DATA: PlayerCircleData[] = [
 
 const PlayerSelect: React.FC = () => {
   const navigation = useNavigation();
+  const [players, setPlayers] = useState<PlayerCircleData[]>([]);
   const {top, bottom} = useSafeAreaInsets();
 
   useEffect(() => {
@@ -70,6 +66,11 @@ const PlayerSelect: React.FC = () => {
       headerShown: false,
     });
   }, [navigation]);
+
+  useEffect(() => {
+    const allPlayers = [...DATA, {id: '6', isAddPlayer: true}];
+    setPlayers(allPlayers);
+  }, []);
 
   const renderHeader = () => (
     <View className="justify-center items-center pt-10">
@@ -82,7 +83,7 @@ const PlayerSelect: React.FC = () => {
   const renderItem: ListRenderItem<PlayerCircleData> = ({item}) => (
     <PlayerCircle
       image={item.image}
-      isActive={item.isActive}
+      gameActive={item.isActive}
       name={item.name}
     />
   );
@@ -107,7 +108,7 @@ const PlayerSelect: React.FC = () => {
           paddingTop: top,
           paddingBottom: bottom,
         }}
-        data={DATA}
+        data={players}
         keyExtractor={(item) => item.id}
         numColumns={2}
         ListHeaderComponent={renderHeader}
