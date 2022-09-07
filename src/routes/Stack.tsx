@@ -1,9 +1,9 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as SplashScreen from 'expo-splash-screen';
-import Home from '../pages/Home';
 import Signup from '../pages/Signup';
 import {useAuth} from '../hooks/useAuth';
 import Login from '../pages/Login';
+import PlayerSelect from '../pages/PlayerSelect';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +28,7 @@ const StackRouter: React.FC = () => {
       }}
     >
       {user.user ? (
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="PlayerSelect" component={PlayerSelect} />
       ) : (
         <>
           <Stack.Screen name="Login" component={Login} />

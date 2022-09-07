@@ -11,7 +11,7 @@ SplashScreen.preventAutoHideAsync();
 const App: React.FC = () => (
   <AuthProvider>
     <NavigationContainer>
-      <StatusBar style="light" />
+      <StatusBar style="auto" />
       <StackRouter />
     </NavigationContainer>
   </AuthProvider>
