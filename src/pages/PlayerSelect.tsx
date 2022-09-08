@@ -13,7 +13,7 @@ import Feather from '@expo/vector-icons/Feather';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import player1 from '../../assets/player1.png';
 import player2 from '../../assets/player2.png';
-import PlayerCircle from '../components/PlayerCircle';
+import PlayerSelectCircle from '../components/PlayerSelectCircle';
 
 interface PlayerCircleData {
   id: string;
@@ -81,7 +81,7 @@ const PlayerSelect: React.FC = () => {
   );
 
   const renderItem: ListRenderItem<PlayerCircleData> = ({item}) => (
-    <PlayerCircle
+    <PlayerSelectCircle
       image={item.image}
       gameActive={item.isActive}
       name={item.name}
