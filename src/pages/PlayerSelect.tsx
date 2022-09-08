@@ -85,6 +85,9 @@ const PlayerSelect: React.FC = () => {
       image={item.image}
       gameActive={item.isActive}
       name={item.name}
+      onPress={() =>
+        navigation.reset({routes: [{name: 'Menu' as never}], index: 0})
+      }
     />
   );
 

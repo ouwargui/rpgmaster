@@ -10,6 +10,7 @@
     "tailwindcss": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\" "
   },
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^6.3.3",
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/native-stack": "^6.8.0",
     "dotenv": "^16.0.2",

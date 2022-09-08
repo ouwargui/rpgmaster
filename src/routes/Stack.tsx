@@ -4,6 +4,7 @@ import Signup from '../pages/Signup';
 import {useAuth} from '../hooks/useAuth';
 import Login from '../pages/Login';
 import PlayerSelect from '../pages/PlayerSelect';
+import TabRouter from './Tab';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,16 +20,14 @@ const StackRouter: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: {
-          backgroundColor: '#00141A',
-        },
-        headerTitleStyle: {
-          color: '#fff',
-        },
+        headerShown: false,
       }}
     >
       {user.user ? (
-        <Stack.Screen name="PlayerSelect" component={PlayerSelect} />
+        <>
+          <Stack.Screen name="PlayerSelect" component={PlayerSelect} />
+          <Stack.Screen name="Menu" component={TabRouter} />
+        </>
       ) : (
         <>
           <Stack.Screen name="Login" component={Login} />
