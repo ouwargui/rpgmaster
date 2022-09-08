@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {View, Image} from 'react-native';
+import {View, Image, ImageSourcePropType} from 'react-native';
 import SkeletonLoader from './SkeletonLoader';
 
 interface PlayerCircleProps {
-  image?: string | null;
+  image?: ImageSourcePropType | null;
   isActive: boolean;
 }
 
@@ -22,9 +22,9 @@ const PlayerCircle: React.FC<PlayerCircleProps> = ({image, isActive}) => {
         onLoad={() => setImgReady(true)}
         onLoadEnd={() => setImgReady(true)}
         className="w-full h-full"
-        source={{
-          uri: image ?? 'https://avatars.githubusercontent.com/u/1234567?v=4',
-        }}
+        source={
+          image ?? {uri: 'https://avatars.githubusercontent.com/u/1234567?v=4'}
+        }
       />
       {!imgReady && <SkeletonLoader width={skeletonWidth} />}
     </View>

@@ -40,7 +40,7 @@ const PlayerStatusBar: React.FC<PlayerStatusBarProps> = ({
     <View className="w-full">
       {large && <Text>{`${status}: ${actual}/${max}`}</Text>}
       <View
-        className={`w-full ${large ? 'h-5' : 'h-2'} ${bgColor} overflow-hidden`}
+        className={`w-full ${large ? 'h-5' : 'h-1'} ${bgColor} overflow-hidden`}
         onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
       >
         <Animated.View

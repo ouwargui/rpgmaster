@@ -86,7 +86,18 @@ const PlayerSelect: React.FC = () => {
       gameActive={item.isActive}
       name={item.name}
       onPress={() =>
-        navigation.reset({routes: [{name: 'Menu' as never}], index: 0})
+        navigation.reset({
+          index: 0,
+          routes: [
+            {
+              name: 'Menu' as never,
+              params: {
+                screen: 'Home',
+                params: {playerName: item.name, playerImage: item.image},
+              },
+            },
+          ],
+        })
       }
     />
   );
