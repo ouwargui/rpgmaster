@@ -38,13 +38,13 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
 
   return (
     <View
-      className={`w-full h-full bg-[#a0a0a0] items-center justify-center overflow-hidden ${
+      className={`w-full h-full bg-[#b6b6b6] items-center justify-center overflow-hidden ${
         rounded ? 'rounded-[100px]' : ''
       }`}
       style={StyleSheet.absoluteFill}
     >
       <AnimatedLG
-        colors={['#a0a0a0', '#b0b0b0', '#b0b0b0', '#a0a0a0']}
+        colors={['#b6b6b6', '#d0d0d0', '#d0d0d0', '#b6b6b6']}
         start={{x: 0, y: 0}}
         end={{x: 1, y: 0}}
         style={[StyleSheet.absoluteFill, animatedLgStyle]}
