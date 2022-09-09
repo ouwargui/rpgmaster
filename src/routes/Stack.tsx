@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as SplashScreen from 'expo-splash-screen';
 import {useAuth} from '../hooks/useAuth';
-import Login from '../pages/Login';
+import Auth from '../pages/Auth';
 import PlayerSelect from '../pages/PlayerSelect';
 import TabRouter from './Tab';
 
@@ -29,7 +29,7 @@ const StackRouter: React.FC = () => {
         </>
       ) : (
         <>
-          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Auth" component={Auth} />
         </>
       )}
     </Stack.Navigator>

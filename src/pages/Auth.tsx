@@ -20,7 +20,7 @@ import {login, signUp} from '../services/auth';
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
 
-const Login: React.FC = () => {
+const Auth: React.FC = () => {
   const navigation = useNavigation();
   const {bottom} = useSafeAreaInsets();
   const [isLogin, setIsLogin] = useState(true);
@@ -111,4 +111,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Auth;
