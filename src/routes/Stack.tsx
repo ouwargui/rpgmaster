@@ -1,6 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as SplashScreen from 'expo-splash-screen';
-import Signup from '../pages/Signup';
 import {useAuth} from '../hooks/useAuth';
 import Login from '../pages/Login';
 import PlayerSelect from '../pages/PlayerSelect';
@@ -31,7 +30,6 @@ const StackRouter: React.FC = () => {
       ) : (
         <>
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Signup" component={Signup} />
         </>
       )}
     </Stack.Navigator>
