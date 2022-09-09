@@ -16,15 +16,12 @@ import Animated, {
   withTiming,
   runOnJS,
 } from 'react-native-reanimated';
-import {login} from '../services/auth';
+import {login, signUp} from '../services/auth';
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
 
 const Login: React.FC = () => {
   const navigation = useNavigation();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const {bottom} = useSafeAreaInsets();
   const [isLogin, setIsLogin] = useState(true);
   const animatedFormValue = useSharedValue(0);
@@ -35,18 +32,7 @@ const Login: React.FC = () => {
     });
   }, [navigation]);
 
-  const handlePressLogin = async () => {
-    try {
-      setIsLoading(true);
-      await login(email, password);
-      setIsLoading(false);
-    } catch (e) {
-      setIsLoading(false);
-      Alert.alert('Error', 'Invalid email or password');
-    }
-  };
-
-  const handlePressSignup = () => {
+  const handleAnimationState = () => {
     const screen60percentage = (Dimensions.get('screen').height * 70) / 100;
     animatedFormValue.value = withTiming(
       screen60percentage,
@@ -58,13 +44,33 @@ const Login: React.FC = () => {
     );
   };
 
+  const animatedFormStyle = useAnimatedStyle(() => ({
+    transform: [{translateY: animatedFormValue.value}],
+  }));
+
   const handlePressForgotPassword = () => {
     navigation.navigate('ForgotPassword' as never);
   };
 
-  const animatedFormStyle = useAnimatedStyle(() => ({
-    transform: [{translateY: animatedFormValue.value}],
-  }));
+  const handlePressLogin = async (email: string, password: string) => {
+    try {
+      await login(email, password);
+    } catch (e) {
+      Alert.alert('Erro', 'E-mail ou senha inválidos');
+    }
+  };
+
+  const handlePressSignup = async (
+    name: string,
+    email: string,
+    password: string,
+  ) => {
+    try {
+      await signUp(email, password);
+    } catch (e) {
+      Alert.alert('Erro', 'Ocorreu um erro ao criar a sua conta');
+    }
+  };
 
   return (
     <View className="flex-1 bg-[#404040]">
@@ -89,17 +95,15 @@ const Login: React.FC = () => {
         >
           {isLogin ? (
             <LoginForm
-              email={email}
-              setEmail={setEmail}
               handlePressForgotPassword={handlePressForgotPassword}
-              handlePressLogin={handlePressLogin}
-              handlePressSignup={handlePressSignup}
-              isLoading={isLoading}
-              password={password}
-              setPassword={setPassword}
+              handleLogin={handlePressLogin}
+              handleAnimationState={handleAnimationState}
             />
           ) : (
-            <SignupForm goBack={handlePressSignup} />
+            <SignupForm
+              handleSignup={handlePressSignup}
+              handleAnimationState={handleAnimationState}
+            />
           )}
         </Animated.ScrollView>
       </KeyboardAvoidingView>

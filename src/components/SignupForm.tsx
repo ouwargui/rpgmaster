@@ -8,14 +8,26 @@ import LoginWithGoogle from './Auth/LoginWithGoogle';
 import LoginWithApple from './Auth/LoginWithApple';
 
 interface SignupFormProps {
-  goBack: () => void;
+  handleAnimationState: () => void;
+  handleSignup: (
+    name: string,
+    email: string,
+    password: string,
+  ) => Promise<void>;
 }
 
-const SignupForm: React.FC<SignupFormProps> = ({goBack}) => {
+const SignupForm: React.FC<SignupFormProps> = ({
+  handleAnimationState,
+  handleSignup,
+}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handlePressSignup = async () => {
+    await handleSignup(name, email, password);
+  };
 
   return (
     <View className="pt-5 justify-start items-center gap-4">
@@ -23,7 +35,7 @@ const SignupForm: React.FC<SignupFormProps> = ({goBack}) => {
         <TouchableOpacity
           activeOpacity={0.4}
           className="mr-auto"
-          onPress={goBack}
+          onPress={handleAnimationState}
         >
           <Feather name="arrow-left" size={32} color="#404040" />
         </TouchableOpacity>
@@ -64,7 +76,7 @@ const SignupForm: React.FC<SignupFormProps> = ({goBack}) => {
         <Button
           title="Continuar"
           disabled={!name || !email || !password || !confirmPassword}
-          onPress={() => console.log('a')}
+          onPress={handlePressSignup}
         />
         <View>
           <FloatingActionButton>
