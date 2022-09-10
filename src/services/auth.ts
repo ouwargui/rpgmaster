@@ -7,6 +7,8 @@ import {
   signOut as logout,
   signInWithCredential,
   AuthCredential,
+  User,
+  updateProfile,
 } from 'firebase/auth';
 import {firebaseApp} from '../config/firebase';
 
@@ -42,4 +44,11 @@ export const loginWithCredential = async (credential: AuthCredential) => {
   const userCredential = await signInWithCredential(auth, credential);
 
   return userCredential.user;
+};
+
+export const updateUser = async (
+  user: User,
+  data: {displayName?: string; photoUrl?: string},
+) => {
+  await updateProfile(user, data);
 };

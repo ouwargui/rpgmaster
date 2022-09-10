@@ -24,9 +24,12 @@ const SignupForm: React.FC<SignupFormProps> = ({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlePressSignup = async () => {
+    setIsLoading(true);
     await handleSignup(name, email, password);
+    setIsLoading(false);
   };
 
   return (
@@ -75,7 +78,10 @@ const SignupForm: React.FC<SignupFormProps> = ({
       <View className="w-full justify-evenly items-center flex-row">
         <Button
           title="Continuar"
-          disabled={!name || !email || !password || !confirmPassword}
+          disabled={
+            !name || !email || !password || password !== confirmPassword
+          }
+          isLoading={isLoading}
           onPress={handlePressSignup}
         />
         <View>

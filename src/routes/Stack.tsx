@@ -1,5 +1,4 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import * as SplashScreen from 'expo-splash-screen';
 import {useAuth} from '../hooks/useAuth';
 import Auth from '../pages/Auth';
 import PlayerSelect from '../pages/PlayerSelect';
@@ -10,11 +9,9 @@ const Stack = createNativeStackNavigator();
 const StackRouter: React.FC = () => {
   const {user} = useAuth();
 
-  if (!user) {
+  if (!user.user && user.user !== false) {
     return null;
   }
-
-  SplashScreen.hideAsync();
 
   return (
     <Stack.Navigator
@@ -22,14 +19,15 @@ const StackRouter: React.FC = () => {
         headerShown: false,
       }}
     >
-      {user.user ? (
+      {user.user === false && (
+        <>
+          <Stack.Screen name="Auth" component={Auth} />
+        </>
+      )}
+      {user.user && (
         <>
           <Stack.Screen name="PlayerSelect" component={PlayerSelect} />
           <Stack.Screen name="Menu" component={TabRouter} />
-        </>
-      ) : (
-        <>
-          <Stack.Screen name="Auth" component={Auth} />
         </>
       )}
     </Stack.Navigator>

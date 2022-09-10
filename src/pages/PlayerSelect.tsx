@@ -9,11 +9,11 @@ import {
   ListRenderItem,
 } from 'react-native';
 import Feather from '@expo/vector-icons/Feather';
-
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import PlayerSelectCircle from '../components/PlayerSelectCircle';
+
 import player1 from '../../assets/player1.png';
 import player2 from '../../assets/player2.png';
-import PlayerSelectCircle from '../components/PlayerSelectCircle';
 
 interface PlayerCircleData {
   id: string;

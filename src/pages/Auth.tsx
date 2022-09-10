@@ -16,15 +16,18 @@ import Animated, {
   withTiming,
   runOnJS,
 } from 'react-native-reanimated';
-import {login, signUp} from '../services/auth';
+import {User} from 'firebase/auth';
+import {login, signUp, updateUser} from '../services/auth';
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
+import {useAuth} from '../hooks/useAuth';
 
 const Auth: React.FC = () => {
   const navigation = useNavigation();
   const {bottom} = useSafeAreaInsets();
   const [isLogin, setIsLogin] = useState(true);
   const animatedFormValue = useSharedValue(0);
+  const usernew = useAuth();
 
   useEffect(() => {
     navigation.setOptions({
@@ -66,7 +69,15 @@ const Auth: React.FC = () => {
     password: string,
   ) => {
     try {
-      await signUp(email, password);
+      const user = await signUp(email, password);
+      await updateUser(user, {displayName: name});
+      usernew.user.setUser(
+        (oldUser) =>
+          ({
+            ...oldUser!,
+            displayName: name,
+          } as User),
+      );
     } catch (e) {
       Alert.alert('Erro', 'Ocorreu um erro ao criar a sua conta');
     }
