@@ -5,15 +5,18 @@ import {StatusBar} from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
 import StackRouter from './src/routes/Stack';
 import AuthProvider from './src/contexts/AuthProvider';
+import ApiProvider from './src/contexts/ApiProvider';
 
 SplashScreen.preventAutoHideAsync();
 
 const App: React.FC = () => (
   <AuthProvider>
-    <NavigationContainer>
-      <StatusBar style="auto" />
-      <StackRouter />
-    </NavigationContainer>
+    <ApiProvider>
+      <NavigationContainer>
+        <StatusBar style="auto" />
+        <StackRouter />
+      </NavigationContainer>
+    </ApiProvider>
   </AuthProvider>
 );
 

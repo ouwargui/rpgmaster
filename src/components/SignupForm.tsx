@@ -46,7 +46,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
           Novo Taverneiro
         </Text>
       </View>
-      <View className="flex-1 w-full mb-8">
+      <View className="flex-1 w-full">
         <View className="w-full mb-4">
           <Input placeholder="Nome" value={name} onChangeText={setName} />
         </View>

@@ -29,7 +29,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
   return (
     <>
-      <View className="pt-5 justify-start items-center gap-4">
+      <View className="pt-5 justify-start items-center gap-4 mb-8">
         <Text className="text-[#404040] text-2xl font-semibold mb-2.5">
           Bem vindo à Taverna!
         </Text>

@@ -16,18 +16,18 @@ import Animated, {
   withTiming,
   runOnJS,
 } from 'react-native-reanimated';
-import {User} from 'firebase/auth';
-import {login, signUp, updateUser} from '../services/auth';
+import {login, signUp} from '../services/auth';
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
-import {useAuth} from '../hooks/useAuth';
+import {useApi} from '../hooks/useApi';
+import {RequestUrls} from '../api';
 
 const Auth: React.FC = () => {
   const navigation = useNavigation();
   const {bottom} = useSafeAreaInsets();
   const [isLogin, setIsLogin] = useState(true);
   const animatedFormValue = useSharedValue(0);
-  const usernew = useAuth();
+  const {api} = useApi();
 
   useEffect(() => {
     navigation.setOptions({
@@ -68,19 +68,14 @@ const Auth: React.FC = () => {
     email: string,
     password: string,
   ) => {
-    try {
-      const user = await signUp(email, password);
-      await updateUser(user, {displayName: name});
-      usernew.user.setUser(
-        (oldUser) =>
-          ({
-            ...oldUser!,
-            displayName: name,
-          } as User),
-      );
-    } catch (e) {
-      Alert.alert('Erro', 'Ocorreu um erro ao criar a sua conta');
-    }
+    const user = await signUp(email, password, name);
+
+    await api.makeRequest('POST', RequestUrls.CREATE_USER, {
+      name,
+      email,
+      photoUrl: user?.photoURL,
+      uid: user?.uid,
+    });
   };
 
   return (
@@ -95,10 +90,10 @@ const Auth: React.FC = () => {
           </View>
         </TouchableWithoutFeedback>
         <Animated.ScrollView
-          style={[animatedFormStyle, {paddingBottom: bottom}]}
+          style={animatedFormStyle}
           contentContainerStyle={{
             flexGrow: 1,
-            justifyContent: 'space-between',
+            paddingBottom: bottom === 0 ? 20 : bottom,
           }}
           className="flex-1 p-5 rounded-t-[35px] h-3/5 bg-white"
           showsVerticalScrollIndicator={false}

@@ -14,6 +14,7 @@ import {auth} from '../services/auth';
 interface UserContextData {
   user: User | false | undefined;
   setUser: Dispatch<SetStateAction<User | false | undefined>>;
+  token: string;
 }
 
 interface AuthProviderProps {
@@ -24,14 +25,19 @@ export const AuthContext = createContext({} as UserContextData);
 
 const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
   const [user, setUser] = useState<User | false | undefined>();
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         setUser(firebaseUser);
+        firebaseUser.getIdToken().then((idToken) => {
+          setToken(idToken);
+        });
         SplashScreen.hideAsync();
       } else {
         setUser(false);
+        setToken('');
         SplashScreen.hideAsync();
       }
     });
@@ -40,8 +46,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
   }, []);
 
   const returnValues = useMemo<UserContextData>(
-    () => ({user, setUser}),
-    [user],
+    () => ({user, setUser, token}),
+    [user, token],
   );
 
   return (
