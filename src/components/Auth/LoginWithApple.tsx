@@ -3,10 +3,13 @@ import * as AppleAuth from 'expo-apple-authentication';
 import * as Crypto from 'expo-crypto';
 import {OAuthProvider} from 'firebase/auth';
 import {loginWithCredential} from '../../services/auth';
+import {RequestUrls} from '../../api';
+import {useApi} from '../../hooks/useApi';
 
 const LoginWithApple: React.FC = () => {
   const [isAppleAuthAvailable, setIsAppleAuthAvailable] = useState(false);
   const nonce = Math.random().toString(36).substring(2, 10);
+  const {api} = useApi();
 
   useEffect(() => {
     const setAppleAuthAvailability = async () => {
@@ -38,7 +41,13 @@ const LoginWithApple: React.FC = () => {
         rawNonce: nonce,
       });
 
-      await loginWithCredential(credential);
+      const user = await loginWithCredential(credential);
+      await api.makeRequest('POST', RequestUrls.CREATE_USER, {
+        name: user.displayName,
+        email: user.email,
+        photoUrl: user.photoURL,
+        uid: user.uid,
+      });
     } catch (e) {
       console.error(e);
     }
