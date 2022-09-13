@@ -1,5 +1,5 @@
 import React, {createContext, ReactNode, useEffect} from 'react';
-import {socket} from '../config/socket';
+import {log} from '../config/logger';
 
 const GameControllerContext = createContext(null);
 
@@ -11,7 +11,7 @@ const GameControllerProvider: React.FC<GameControllerProviderProps> = ({
   children,
 }) => {
   useEffect(() => {
-    socket.on('connect', () => console.log('conectei'));
+    log.debug('teste');
   }, []);
 
   return (

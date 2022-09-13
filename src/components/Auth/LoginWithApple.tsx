@@ -5,6 +5,7 @@ import {OAuthProvider} from 'firebase/auth';
 import {loginWithCredential} from '../../services/auth';
 import {RequestUrls} from '../../api';
 import {useApi} from '../../hooks/useApi';
+import {log} from '../../config/logger';
 
 const LoginWithApple: React.FC = () => {
   const [isAppleAuthAvailable, setIsAppleAuthAvailable] = useState(false);
@@ -49,7 +50,7 @@ const LoginWithApple: React.FC = () => {
         uid: user.uid,
       });
     } catch (e) {
-      console.error(e);
+      log.error(e);
     }
   };
 

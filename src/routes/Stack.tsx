@@ -1,6 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useAuth} from '../hooks/useAuth';
 import Auth from '../pages/Auth';
+import ForgotPassword from '../pages/ForgotPassword';
 import PlayerSelect from '../pages/PlayerSelect';
 import TabRouter from './Tab';
 
@@ -22,6 +23,7 @@ const StackRouter: React.FC = () => {
       {user.user === false && (
         <>
           <Stack.Screen name="Auth" component={Auth} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         </>
       )}
       {user.user && (
