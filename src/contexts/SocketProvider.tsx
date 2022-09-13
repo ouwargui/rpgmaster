@@ -1,19 +1,24 @@
 import React, {
   createContext,
-  Dispatch,
   ReactNode,
-  SetStateAction,
   useEffect,
   useMemo,
   useState,
 } from 'react';
-import {log} from '../config/logger';
 import {socket} from '../config/socket';
 import {useAuth} from '../hooks/useAuth';
+import {useGameController} from '../hooks/useGameController';
+import {join_room, leave_room} from '../sockets/emitters';
+import {
+  onConnect,
+  onConnectError,
+  onDisconnect,
+  onJoinedRoom,
+  onLeftRoom,
+} from '../sockets/listeners';
 
 interface SocketContextData {
-  room: string | null;
-  setRoom: Dispatch<SetStateAction<string | null>>;
+  isConnected: boolean;
 }
 
 export const SocketContext = createContext({} as SocketContextData);
@@ -23,17 +28,17 @@ interface SocketProviderProps {
 }
 
 const SocketProvider: React.FC<SocketProviderProps> = ({children}) => {
-  const [room, setRoom] = useState<string | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
+  const {gameRoom} = useGameController();
   const {user} = useAuth();
 
   useEffect(() => {
-    socket.on('connect', () => log.debug('conectei'));
-    socket.on('disconnect', () => log.debug('desconectei'));
+    socket.on('connect', () => onConnect(setIsConnected));
+    socket.on('disconnect', () => onDisconnect(setIsConnected));
+    socket.on('connect_error', onConnectError);
 
-    socket.on('user_connected', (data) => {
-      log.info('recebi user_connected');
-      log.info(data);
-    });
+    socket.on('joined_room', onJoinedRoom);
+    socket.on('left_room', onLeftRoom);
 
     return () => {
       socket.off('connect');
@@ -42,19 +47,22 @@ const SocketProvider: React.FC<SocketProviderProps> = ({children}) => {
   }, []);
 
   useEffect(() => {
-    if (room) {
-      log.info('enviei socket join_room');
-      socket.emit('join_room', {room, user: user.user});
+    if (gameRoom) {
+      join_room(socket, gameRoom);
+      return;
     }
-  }, [room, user]);
+
+    leave_room(socket);
+  }, [gameRoom]);
 
   useEffect(() => {
-    if (user.token) {
-      socket.auth = {token: user.token};
+    if (user.user) {
+      socket.auth = {user: user.user.uid, token: user?.token};
+      socket.connect();
     }
-  }, [user.token]);
+  }, [user]);
 
-  const returnValues = useMemo(() => ({room, setRoom}), [room]);
+  const returnValues = useMemo(() => ({isConnected}), [isConnected]);
 
   return (
     <SocketContext.Provider value={returnValues}>

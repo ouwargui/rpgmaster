@@ -1,7 +1,20 @@
-import React, {createContext, ReactNode, useEffect} from 'react';
-import {log} from '../config/logger';
+import React, {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useMemo,
+  useState,
+} from 'react';
 
-const GameControllerContext = createContext(null);
+interface GameControllerContextData {
+  gameRoom: string;
+  setGameRoom: Dispatch<SetStateAction<string>>;
+}
+
+export const GameControllerContext = createContext(
+  {} as GameControllerContextData,
+);
 
 interface GameControllerProviderProps {
   children: ReactNode;
@@ -10,12 +23,15 @@ interface GameControllerProviderProps {
 const GameControllerProvider: React.FC<GameControllerProviderProps> = ({
   children,
 }) => {
-  useEffect(() => {
-    log.debug('teste');
-  }, []);
+  const [gameRoom, setGameRoom] = useState('');
+
+  const returnValues = useMemo(
+    () => ({gameRoom, setGameRoom}),
+    [gameRoom, setGameRoom],
+  );
 
   return (
-    <GameControllerContext.Provider value={null}>
+    <GameControllerContext.Provider value={returnValues}>
       {children}
     </GameControllerContext.Provider>
   );
