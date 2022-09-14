@@ -40,7 +40,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
       ))}
       <Animated.View
         style={[buttonStyle]}
-        className="absolute w-14 h-14 rounded-[100px] items-center justify-center shadow-xl shadow-[#00000071] bg-zinc-600"
+        className="absolute w-14 h-14 rounded-[100px] items-center justify-center shadow-xl shadow-[#00000071] bg-[#404040]"
       >
         <TouchableOpacity
           activeOpacity={0.7}
