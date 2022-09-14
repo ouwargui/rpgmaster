@@ -19,6 +19,7 @@ const onConnectError = (error: Error) => {
 };
 
 const onJoinedRoom = (data: onJoinedRoomData) => {
+  log.debug(data);
   log.debug(`${data.user} joined room ${data.room}`);
 };
 

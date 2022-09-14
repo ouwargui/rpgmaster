@@ -49,5 +49,6 @@ export default ({config}: ConfigContext): ExpoConfig => ({
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_KEY: process.env.GOOGLE_CLIENT_KEY,
     SOCKET_URL: process.env.SOCKET_URL,
+    API_URL: process.env.API_URL,
   },
 });
