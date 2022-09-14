@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
+import {useForm} from 'react-hook-form';
 import {View, Text, TouchableOpacity, Image, Platform} from 'react-native';
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup';
 import LoginWithApple from './Auth/LoginWithApple';
 import LoginWithGoogle from './Auth/LoginWithGoogle';
 import Button from './Button';
+import ControlledInput from './ControlledInput';
 import FloatingActionButton from './FloatingActionButton/FloatingActionButton';
-import Input from './Input';
 
 interface LoginFormProps {
   handlePressForgotPassword: () => void;
@@ -12,16 +15,31 @@ interface LoginFormProps {
   handleAnimationState: () => void;
 }
 
+interface LoginData {
+  email: string;
+  password: string;
+}
+
+const schema = yup.object({
+  email: yup.string().email('E-mail inválido').required('E-mail é obrigatório'),
+  password: yup.string().required('Senha é obrigatório'),
+});
+
 const LoginForm: React.FC<LoginFormProps> = ({
   handlePressForgotPassword,
   handleLogin,
   handleAnimationState,
 }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm<LoginData>({
+    resolver: yupResolver(schema),
+  });
 
-  const handlePressLogin = async () => {
+  const handlePressLogin = async ({email, password}: LoginData) => {
     setIsLoading(true);
     await handleLogin(email, password);
     setIsLoading(false);
@@ -33,17 +51,19 @@ const LoginForm: React.FC<LoginFormProps> = ({
         <Text className="text-[#404040] text-2xl font-semibold mb-2.5">
           Bem vindo à Taverna!
         </Text>
-        <Input
-          placeholder="Login"
+        <ControlledInput
+          name="email"
           contentType="emailAddress"
-          value={email}
-          onChangeText={setEmail}
+          placeholder="E-mail"
+          control={control}
+          errors={errors.email}
         />
-        <Input
+        <ControlledInput
+          name="password"
           placeholder="Senha"
           contentType="password"
-          value={password}
-          onChangeText={setPassword}
+          control={control}
+          errors={errors.password}
         />
         <TouchableOpacity
           activeOpacity={0.6}
@@ -55,8 +75,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         <View className="w-full justify-evenly items-center flex-row">
           <Button
             title="Entrar na taverna"
-            disabled={!email || !password}
-            onPress={handlePressLogin}
+            onPress={handleSubmit(handlePressLogin)}
             isLoading={isLoading}
           />
           <View>
