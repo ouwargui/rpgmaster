@@ -9,12 +9,19 @@ import googleLogo from '../../../assets/google-logo.png';
 import {RequestUrls} from '../../api';
 import {useApi} from '../../hooks/useApi';
 
+const GOOGLE_WEB_CLIENT_ID = Constants.manifest?.extra
+  ?.GOOGLE_WEB_CLIENT_ID as string;
+const ANDROID_CLIENT_ID = Constants.manifest?.extra
+  ?.ANDROID_CLIENT_ID as string;
+const IOS_CLIENT_ID = Constants.manifest?.extra?.IOS_CLIENT_ID as string;
+
 WebBrowser.maybeCompleteAuthSession();
 
 const LoginWithGoogle: React.FC = () => {
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: Constants.manifest?.extra
-      ?.FIREBASE_GOOGLEAUTH_CLIENT_ID as string,
+    clientId: GOOGLE_WEB_CLIENT_ID,
+    androidClientId: ANDROID_CLIENT_ID,
+    iosClientId: IOS_CLIENT_ID,
   });
   const {api} = useApi();
 
