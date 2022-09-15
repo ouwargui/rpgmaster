@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, {createContext, ReactNode, useCallback, useMemo} from 'react';
 import {Alert} from 'react-native';
 import {apiClient, RequestMethods, RequestUrls} from '../api';
+import {log} from '../config/logger';
 import {useAuth} from '../hooks/useAuth';
 
 export const ApiContext = createContext(
@@ -51,6 +52,9 @@ const ApiProvider: React.FC<ApiProviderProps> = ({children}) => {
             ]);
           }
         }
+
+        log.error(error);
+
         return Alert.alert(
           'Erro',
           'Ocorreu um erro, tente novamente mais tarde',

@@ -43,6 +43,7 @@ export const signOut = async () => {
 };
 
 export const loginWithCredential = async (credential: AuthCredential) => {
+  await setPersistence(auth, inMemoryPersistence);
   const userCredential = await signInWithCredential(auth, credential);
 
   return userCredential.user;

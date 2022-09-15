@@ -46,7 +46,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   };
 
   return (
-    <>
+    <View className="flex-1 justify-between">
       <View className="pt-5 justify-start items-center gap-4 mb-8">
         <Text className="text-[#404040] text-2xl font-semibold mb-2.5">
           Bem vindo à Taverna!
@@ -72,7 +72,9 @@ const LoginForm: React.FC<LoginFormProps> = ({
         >
           <Text className="underline text-[#404040]">Esqueci minha senha.</Text>
         </TouchableOpacity>
-        <View className="w-full justify-evenly items-center flex-row">
+      </View>
+      <View>
+        <View className="w-full justify-evenly items-center pb-6 flex-row">
           <Button
             title="Entrar na taverna"
             onPress={handleSubmit(handlePressLogin)}
@@ -85,22 +87,22 @@ const LoginForm: React.FC<LoginFormProps> = ({
             </FloatingActionButton>
           </View>
         </View>
+        <TouchableOpacity
+          className="rounded-[100px] border-[1px] border-[#eee] bg-[#fff] h-[36px] w-40 shadow-md
+                  shadow-[#00000071] bottom-[10px] self-center flex justify-center items-center flex-row"
+          activeOpacity={0.6}
+          onPress={handleAnimationState}
+        >
+          <Image
+            className="w-[30px] h-[30px]"
+            source={{uri: 'https://i.imgur.com/IYYKyQt.png'}}
+          />
+          <Text className="text-[#404040] font-semibold text-[14px]">
+            Novo Taverneiro
+          </Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        className="rounded-[100px] border-[1px] border-[#eee] bg-[#fff] h-[36px] w-40 shadow-md
-                shadow-[#00000071] bottom-[10px] self-center flex justify-center items-center flex-row"
-        activeOpacity={0.6}
-        onPress={handleAnimationState}
-      >
-        <Image
-          className="w-[30px] h-[30px]"
-          source={{uri: 'https://i.imgur.com/IYYKyQt.png'}}
-        />
-        <Text className="text-[#404040] font-semibold text-[14px]">
-          Novo Taverneiro
-        </Text>
-      </TouchableOpacity>
-    </>
+    </View>
   );
 };
 
